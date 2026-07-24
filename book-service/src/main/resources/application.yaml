@@ -1,3 +1,25 @@
 spring:
   application:
     name: book-service
+  mvc:
+    problemdetails:
+      enabled: true
+  datasource:
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    url: ${SPRING_DATASOURCE_URL:jdbc:sqlserver://localhost:1433;databaseName=book-service;encrypt=true;trustServerCertificate=true}
+    username: ${SPRING_DATASOURCE_USERNAME:sa}
+    password: ${SPRING_DATASOURCE_PASSWORD:sa}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+  flyway:
+    enabled: true
+  rabbitmq:
+    addresses: ${SPRING_RABBITMQ_ADDRESSES}
+
+server:
+  port: 8081
+
+broker:
+  exchange-name: ${BROKER_EXCHANGE_NAME:}
+  book-queue: ${BROKER_BOOK_QUEUE:book.queue}
