@@ -1,4 +1,4 @@
-package com.github.geovanegsfarias.notification_service;
+package com.github.geovanegsfarias;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
