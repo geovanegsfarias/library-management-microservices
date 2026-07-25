@@ -29,10 +29,12 @@ public class BookService {
     }
 
     public Book save(Book bookToSave) {
+        assertAvailableCopiesIsValid(bookToSave);
         return bookRepository.save(bookToSave);
     }
 
     public void update(Book bookToUpdate) {
+        assertAvailableCopiesIsValid(bookToUpdate);
         var savedBook = findByIdOrThrowException(bookToUpdate.getId());
         savedBook.setTitle(bookToUpdate.getTitle());
         savedBook.setAuthor(bookToUpdate.getAuthor());
@@ -71,6 +73,12 @@ public class BookService {
     private void assertApiKeyIsValid(String apiKey) {
         if (!apiKey.equals(configurationProperties.apiKey())) {
             throw new UnauthorizedAccessException("Unauthorized access");
+        }
+    }
+
+    private void assertAvailableCopiesIsValid(Book book) {
+        if (book.getAvailableCopies() > book.getTotalCopies()) {
+            throw new IllegalArgumentException("Available copies cannot be greater than total copies");
         }
     }
 }
