@@ -26,3 +26,8 @@ book-service:
 broker:
   exchange-name: ${BROKER_EXCHANGE_NAME:}
   notification-queue: ${BROKER_NOTIFICATION_QUEUE:notification.queue}
+
+app:
+  jwt:
+    public-key: ${JWT_PUBLIC_KEY_PATH:file:./src/main/resources/app.pub}
+    private-key: ${JWT_PRIVATE_KEY_PATH:file:./src/main/resources/app.key}

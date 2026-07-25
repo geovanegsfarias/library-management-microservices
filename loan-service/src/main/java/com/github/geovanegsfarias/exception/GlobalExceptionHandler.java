@@ -41,4 +41,11 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
         return ResponseEntity.status(HttpStatus.CONFLICT).body(problemDetail);
     }
+
+    @ExceptionHandler(UserAlreadyExistsException.class)
+    public ResponseEntity<ProblemDetail> handleUserAlreadyExistsException(UserAlreadyExistsException e, WebRequest request) {
+        var problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.CONFLICT, e.getMessage());
+
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(problemDetail);
+    }
 }

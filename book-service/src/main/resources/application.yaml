@@ -14,12 +14,6 @@ spring:
       ddl-auto: validate
   flyway:
     enabled: true
-  rabbitmq:
-    addresses: ${SPRING_RABBITMQ_ADDRESSES}
 
 server:
   port: 8081
-
-broker:
-  exchange-name: ${BROKER_EXCHANGE_NAME:}
-  book-queue: ${BROKER_BOOK_QUEUE:book.queue}
