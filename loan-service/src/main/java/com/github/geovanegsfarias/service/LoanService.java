@@ -1,6 +1,7 @@
 package com.github.geovanegsfarias.service;
 
 import com.github.geovanegsfarias.client.BookClient;
+import com.github.geovanegsfarias.client.dto.BookResponse;
 import com.github.geovanegsfarias.configuration.ApiKeyConfigurationProperties;
 import com.github.geovanegsfarias.exception.LoanAlreadyReturnedException;
 import com.github.geovanegsfarias.exception.LoanNotFoundException;
@@ -45,7 +46,9 @@ public class LoanService {
     public Loan save(Loan loanToSave, String userEmail) {
         var bookId = loanToSave.getBookId();
 
-        bookClient.reserveBook(bookId, configurationProperties.apiKey());
+        var bookResponse = bookClient.reserveBook(bookId, configurationProperties.apiKey());
+
+        loanToSave.setBookTitle(bookResponse.title());
 
         var authenticatedUser = userService.findByEmailOrThrowException(userEmail);
         loanToSave.setUser(authenticatedUser);

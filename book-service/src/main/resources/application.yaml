@@ -20,4 +20,8 @@ server:
 
 app:
   header:
-    api-key: ${API_KEY:1234}
+    api-key: ${INTERNAL_API_KEY:1234}
+
+springdoc:
+  swagger-ui:
+    operations-sorter: method

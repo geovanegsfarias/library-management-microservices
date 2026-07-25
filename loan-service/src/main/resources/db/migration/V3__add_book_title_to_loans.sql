@@ -1,0 +1,1 @@
+ALTER TABLE loans ADD book_title VARCHAR(255);

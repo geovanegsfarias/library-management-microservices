@@ -1,4 +1,7 @@
 package com.github.geovanegsfarias.dto;
 
-public record CreateLoanRequest(Long bookId) {
+import jakarta.validation.constraints.NotNull;
+
+public record CreateLoanRequest(
+        @NotNull(message = "Book ID is required") Long bookId) {
 }

@@ -20,6 +20,6 @@ public class NotificationConsumer {
     public void listener(LoanOverdueEvent event) {
         var notification = mapper.toNotification(event);
 
-        notificationService.sendNotification(notification);
+        notificationService.sendNotification(notification, event);
     }
 }

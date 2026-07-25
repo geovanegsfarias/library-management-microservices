@@ -21,6 +21,7 @@ public class Loan {
     private Long id;
     @Column(nullable = false)
     private Long bookId;
+    private String bookTitle;
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
