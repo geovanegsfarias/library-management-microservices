@@ -1,12 +1,12 @@
 package com.github.geovanegsfarias.service;
 
 import com.github.geovanegsfarias.client.BookClient;
+import com.github.geovanegsfarias.configuration.ApiKeyConfigurationProperties;
 import com.github.geovanegsfarias.exception.LoanAlreadyReturnedException;
 import com.github.geovanegsfarias.exception.LoanNotFoundException;
 import com.github.geovanegsfarias.mapper.LoanMapper;
 import com.github.geovanegsfarias.model.Loan;
 import com.github.geovanegsfarias.model.LoanStatus;
-import com.github.geovanegsfarias.model.User;
 import com.github.geovanegsfarias.producer.NotificationProducer;
 import com.github.geovanegsfarias.repository.LoanRepository;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -23,13 +23,15 @@ public class LoanService {
     private final BookClient bookClient;
     private final NotificationProducer notificationProducer;
     private final UserService userService;
+    private final ApiKeyConfigurationProperties configurationProperties;
 
-    public LoanService(LoanRepository loanRepository, LoanMapper mapper, BookClient bookClient, NotificationProducer notificationProducer, UserService userService) {
+    public LoanService(LoanRepository loanRepository, LoanMapper mapper, BookClient bookClient, NotificationProducer notificationProducer, UserService userService, ApiKeyConfigurationProperties configurationProperties) {
         this.loanRepository = loanRepository;
         this.mapper = mapper;
         this.bookClient = bookClient;
         this.notificationProducer = notificationProducer;
         this.userService = userService;
+        this.configurationProperties = configurationProperties;
     }
 
     public List<Loan> findAll() {
@@ -43,7 +45,7 @@ public class LoanService {
     public Loan save(Loan loanToSave, String userEmail) {
         var bookId = loanToSave.getBookId();
 
-        bookClient.reserveBook(bookId);
+        bookClient.reserveBook(bookId, configurationProperties.apiKey());
 
         var authenticatedUser = userService.findByEmailOrThrowException(userEmail);
         loanToSave.setUser(authenticatedUser);
@@ -60,7 +62,7 @@ public class LoanService {
 
         assertLoanIsNotReturned(loanToReturn);
 
-        bookClient.returnBook(loanToReturn.getBookId());
+        bookClient.returnBook(loanToReturn.getBookId(), configurationProperties.apiKey());
 
         loanToReturn.setStatus(LoanStatus.RETURNED);
 

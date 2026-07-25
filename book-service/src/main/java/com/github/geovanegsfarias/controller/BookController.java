@@ -82,10 +82,10 @@ public class BookController {
     }
 
     @PutMapping("/{id}/reserve")
-    public ResponseEntity<BookResponse> reserveBook(@PathVariable Long id) {
+    public ResponseEntity<BookResponse> reserveBook(@PathVariable Long id, @RequestHeader("X-Api-Key") String apiKey) {
         log.debug("Request received to reserve a book by id {}", id);
 
-        var reservedBook = bookService.reserveBook(id);
+        var reservedBook = bookService.reserveBook(id, apiKey);
 
         var bookResponse = mapper.toBookResponse(reservedBook);
 
@@ -93,10 +93,10 @@ public class BookController {
     }
 
     @PutMapping("/{id}/return")
-    public ResponseEntity<BookResponse> returnBook(@PathVariable Long id) {
+    public ResponseEntity<BookResponse> returnBook(@PathVariable Long id, @RequestHeader("X-Api-Key") String apiKey) {
         log.debug("Request received to return a book by id {}", id);
 
-        var returnedBook = bookService.returnBook(id);
+        var returnedBook = bookService.returnBook(id, apiKey);
 
         var bookResponse = mapper.toBookResponse(returnedBook);
 

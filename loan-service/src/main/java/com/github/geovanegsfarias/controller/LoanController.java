@@ -3,7 +3,6 @@ package com.github.geovanegsfarias.controller;
 import com.github.geovanegsfarias.dto.CreateLoanRequest;
 import com.github.geovanegsfarias.dto.LoanResponse;
 import com.github.geovanegsfarias.mapper.LoanMapper;
-import com.github.geovanegsfarias.model.Loan;
 import com.github.geovanegsfarias.service.LoanService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
