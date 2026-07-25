@@ -1,0 +1,7 @@
+CREATE TABLE notifications(
+    id BIGINT IDENTITY(1,1) PRIMARY KEY,
+    [to] VARCHAR(255) NOT NULL,
+    subject VARCHAR(255) NOT NULL,
+    body VARCHAR(255) NOT NULL,
+    send_at DATETIMEOFFSET NOT NULL
+);
