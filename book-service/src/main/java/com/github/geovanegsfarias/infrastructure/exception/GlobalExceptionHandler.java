@@ -1,5 +1,8 @@
 package com.github.geovanegsfarias.infrastructure.exception;
 
+import com.github.geovanegsfarias.core.exception.BookNotFoundException;
+import com.github.geovanegsfarias.core.exception.BookUnavailableException;
+import com.github.geovanegsfarias.core.exception.UnauthorizedAccessException;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.*;
 import org.springframework.web.bind.MethodArgumentNotValidException;

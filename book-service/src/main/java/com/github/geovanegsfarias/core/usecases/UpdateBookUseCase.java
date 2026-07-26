@@ -2,24 +2,30 @@ package com.github.geovanegsfarias.core.usecases;
 
 import com.github.geovanegsfarias.core.entities.Book;
 import com.github.geovanegsfarias.core.gateway.BookGateway;
-import com.github.geovanegsfarias.infrastructure.exception.BookNotFoundException;
 
 public class UpdateBookUseCase {
 
     private final BookGateway bookGateway;
+    private final FindBookByIdUseCase findBookByIdUseCase;
 
-    public UpdateBookUseCase(BookGateway bookGateway) {
+    public UpdateBookUseCase(BookGateway bookGateway, FindBookByIdUseCase findBookByIdUseCase) {
         this.bookGateway = bookGateway;
+        this.findBookByIdUseCase = findBookByIdUseCase;
     }
 
     public void updateBook(Book bookToUpdate) {
         assertAvailableCopiesIsValid(bookToUpdate);
-        var savedBook = bookGateway.findById(bookToUpdate.getId()).orElseThrow(() -> new BookNotFoundException("Book not found"));
-        savedBook.setTitle(bookToUpdate.getTitle());
-        savedBook.setAuthor(bookToUpdate.getAuthor());
-        savedBook.setPublisher(bookToUpdate.getPublisher());
-        savedBook.setTotalCopies(bookToUpdate.getTotalCopies());
-        savedBook.setAvailableCopies(bookToUpdate.getAvailableCopies());
+
+        var savedBook = findBookByIdUseCase.findBookById(bookToUpdate.getId());
+
+        savedBook.updateBook(
+                bookToUpdate.getTitle(),
+                bookToUpdate.getAuthor(),
+                bookToUpdate.getPublisher(),
+                bookToUpdate.getTotalCopies(),
+                bookToUpdate.getAvailableCopies()
+        );
+
         bookGateway.save(savedBook);
     }
 

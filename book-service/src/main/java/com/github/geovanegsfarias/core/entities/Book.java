@@ -1,5 +1,7 @@
 package com.github.geovanegsfarias.core.entities;
 
+import com.github.geovanegsfarias.core.exception.BookUnavailableException;
+
 public class Book {
     private Long id;
     private String title;
@@ -57,5 +59,25 @@ public class Book {
 
     public void setAvailableCopies(Integer availableCopies) {
         this.availableCopies = availableCopies;
+    }
+
+    public void updateBook(String title, String author, String publisher, Integer totalCopies, Integer availableCopies) {
+        this.title = title;
+        this.author = author;
+        this.publisher = publisher;
+        this.totalCopies = totalCopies;
+        this.availableCopies = availableCopies;
+    }
+
+    public void reserveCopy() {
+        if (this.availableCopies <= 0) {
+            throw new BookUnavailableException("Book unavailable");
+        }
+
+        this.availableCopies--;
+    }
+
+    public void returnCopy() {
+        this.availableCopies++;
     }
 }

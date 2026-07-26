@@ -1,4 +1,4 @@
-CREATE TABLE loans (
+CREATE TABLE loanEntities (
   id BIGINT IDENTITY(1,1) PRIMARY KEY,
   book_id BIGINT NOT NULL,
   user_id BIGINT NOT NULL,

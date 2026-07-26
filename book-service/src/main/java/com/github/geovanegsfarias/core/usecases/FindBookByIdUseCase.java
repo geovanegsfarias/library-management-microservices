@@ -1,8 +1,8 @@
 package com.github.geovanegsfarias.core.usecases;
 
 import com.github.geovanegsfarias.core.entities.Book;
+import com.github.geovanegsfarias.core.exception.BookNotFoundException;
 import com.github.geovanegsfarias.core.gateway.BookGateway;
-import com.github.geovanegsfarias.infrastructure.exception.BookNotFoundException;
 
 public class FindBookByIdUseCase {
 

@@ -32,23 +32,23 @@ public class BeanConfiguration {
     }
 
     @Bean
-    public UpdateBookUseCase updateBookUseCase(BookGateway bookGateway) {
-        return new UpdateBookUseCase(bookGateway);
+    public UpdateBookUseCase updateBookUseCase(BookGateway bookGateway, FindBookByIdUseCase findBookByIdUseCase) {
+        return new UpdateBookUseCase(bookGateway, findBookByIdUseCase);
     }
 
     @Bean
-    public DeleteBookUseCase deleteBookUseCase(BookGateway bookGateway) {
-        return new DeleteBookUseCase(bookGateway);
+    public DeleteBookUseCase deleteBookUseCase(BookGateway bookGateway, FindBookByIdUseCase findBookByIdUseCase) {
+        return new DeleteBookUseCase(bookGateway, findBookByIdUseCase);
     }
 
     @Bean
-    public ReserveBookUseCase reserveBookUseCase(BookGateway bookGateway) {
-        return new ReserveBookUseCase(bookGateway);
+    public ReserveBookUseCase reserveBookUseCase(BookGateway bookGateway, FindBookByIdUseCase findBookByIdUseCase) {
+        return new ReserveBookUseCase(bookGateway, findBookByIdUseCase);
     }
 
     @Bean
-    public ReturnBookUseCase returnBookUseCase(BookGateway bookGateway) {
-        return new ReturnBookUseCase(bookGateway);
+    public ReturnBookUseCase returnBookUseCase(BookGateway bookGateway, FindBookByIdUseCase findBookByIdUseCase) {
+        return new ReturnBookUseCase(bookGateway, findBookByIdUseCase);
     }
 
 }

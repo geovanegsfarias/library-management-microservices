@@ -2,27 +2,20 @@ package com.github.geovanegsfarias.core.usecases;
 
 import com.github.geovanegsfarias.core.entities.Book;
 import com.github.geovanegsfarias.core.gateway.BookGateway;
-import com.github.geovanegsfarias.infrastructure.exception.BookNotFoundException;
-import com.github.geovanegsfarias.infrastructure.exception.BookUnavailableException;
 
 public class ReserveBookUseCase {
 
     private final BookGateway bookGateway;
+    private final FindBookByIdUseCase findBookByIdUseCase;
 
-    public ReserveBookUseCase(BookGateway bookGateway) {
+    public ReserveBookUseCase(BookGateway bookGateway, FindBookByIdUseCase findBookByIdUseCase) {
         this.bookGateway = bookGateway;
+        this.findBookByIdUseCase = findBookByIdUseCase;
     }
 
     public Book reserveBook(Long id) {
-        var bookToReserve = bookGateway.findById(id).orElseThrow(() -> new BookNotFoundException("Book not found"));
-        assertBookIsAvailable(bookToReserve);
-        bookToReserve.setAvailableCopies(bookToReserve.getAvailableCopies() - 1);
+        var bookToReserve = findBookByIdUseCase.findBookById(id);
+        bookToReserve.reserveCopy();
         return bookGateway.save(bookToReserve);
-    }
-
-    private void assertBookIsAvailable(Book book) {
-        if (book.getAvailableCopies() <= 0) {
-            throw new BookUnavailableException("Book unavailable");
-        }
     }
 }
