@@ -7,7 +7,7 @@
 ![Swagger](https://img.shields.io/badge/Swagger-3-27AE60)
 ![Docker](https://img.shields.io/badge/Docker-On-2980B9)
 
-<img src="book-service/images/diagrama.png" alt="Diagrama">
+<img src="notification-service/images/diagrama.png" alt="Diagrama">
 
 ---
 
@@ -15,7 +15,7 @@
 
 Sistema de gerenciamento de biblioteca dividido em três microsserviços independentes, cada um com seu próprio banco de dados, seguindo arquitetura de microsserviços com comunicação síncrona e assíncrona entre eles através do OpenFeign e do RabbitMQ.
 
-O book-service cuida do cadastro, consulta e controle de disponibilidade dos livros. O loan-service autentica os usuários via JWT, cria e devolve empréstimos consultando e reservando a disponibilidade do livro em tempo real, e roda um job diário que identifica empréstimos em atraso e publica um evento numa fila do RabbitMQ. O notification-service consome esses eventos e envia e-mails para o usuário do empréstimo.
+O bookJpaEntity-service cuida do cadastro, consulta e controle de disponibilidade dos livros. O loan-service autentica os usuários via JWT, cria e devolve empréstimos consultando e reservando a disponibilidade do livro em tempo real, e roda um job diário que identifica empréstimos em atraso e publica um evento numa fila do RabbitMQ. O notification-service consome esses eventos e envia e-mails para o usuário do empréstimo.
 
 ---
 
@@ -24,7 +24,7 @@ O book-service cuida do cadastro, consulta e controle de disponibilidade dos liv
 - CRUD de livros com controle de cópias disponíveis.
 - Cadastro, autenticação (JWT) e criação/devolução de empréstimos com verificação de disponibilidade em tempo real.
 - Verificação diária de empréstimos em atraso via job agendado.
-- Consumo assíncrono de eventos de atraso via RabbitMQ, com envio de e-mail ao usuário.
+- Envio de e-mail de atraso ao usuário, processado de forma assíncrona via RabbitMQ.
 - Testes automatizados, validação de dados, tratamento global de exceções e documentação via Swagger em cada serviço.
 
 ---
@@ -44,15 +44,15 @@ O book-service cuida do cadastro, consulta e controle de disponibilidade dos liv
 
 ### Endpoints
 
-#### book-service
+#### bookJpaEntity-service
 
-- `GET /v1/books` — lista livros.
-- `GET /v1/books/{id}` — busca um livro específico.
-- `POST /v1/books` — cadastra um livro.
-- `PUT /v1/books/{id}` — atualiza um livro.
-- `DELETE /v1/books/{id}` — remove um livro.
-- `PUT /v1/books/{id}/reserve` — reserva uma cópia.
-- `PUT /v1/books/{id}/return` — libera uma cópia.
+- `GET /v1/bookJpaEntities` — lista livros.
+- `GET /v1/bookJpaEntities/{id}` — busca um livro específico.
+- `POST /v1/bookJpaEntities` — cadastra um livro.
+- `PUT /v1/bookJpaEntities/{id}` — atualiza um livro.
+- `DELETE /v1/bookJpaEntities/{id}` — remove um livro.
+- `PUT /v1/bookJpaEntities/{id}/reserve` — reserva uma cópia.
+- `PUT /v1/bookJpaEntities/{id}/return` — libera uma cópia.
 
 #### loan-service
 

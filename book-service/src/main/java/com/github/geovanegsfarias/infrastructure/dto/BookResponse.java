@@ -1,4 +1,4 @@
-package com.github.geovanegsfarias.dto;
+package com.github.geovanegsfarias.infrastructure.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 

@@ -1,4 +1,4 @@
-package com.github.geovanegsfarias.configuration;
+package com.github.geovanegsfarias.infrastructure.beans;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Contact;

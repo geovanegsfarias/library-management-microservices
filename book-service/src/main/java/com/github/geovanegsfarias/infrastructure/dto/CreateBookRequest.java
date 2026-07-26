@@ -1,4 +1,4 @@
-package com.github.geovanegsfarias.dto;
+package com.github.geovanegsfarias.infrastructure.dto;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;

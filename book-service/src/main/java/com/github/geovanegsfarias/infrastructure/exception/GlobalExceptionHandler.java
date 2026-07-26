@@ -1,4 +1,4 @@
-package com.github.geovanegsfarias.exception;
+package com.github.geovanegsfarias.infrastructure.exception;
 
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.*;

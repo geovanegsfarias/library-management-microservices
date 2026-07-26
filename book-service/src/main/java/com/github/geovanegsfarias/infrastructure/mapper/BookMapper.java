@@ -1,8 +1,8 @@
-package com.github.geovanegsfarias.mapper;
+package com.github.geovanegsfarias.infrastructure.mapper;
 
-import com.github.geovanegsfarias.dto.BookResponse;
-import com.github.geovanegsfarias.dto.CreateBookRequest;
-import com.github.geovanegsfarias.model.Book;
+import com.github.geovanegsfarias.core.entities.Book;
+import com.github.geovanegsfarias.infrastructure.dto.BookResponse;
+import com.github.geovanegsfarias.infrastructure.dto.CreateBookRequest;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
 

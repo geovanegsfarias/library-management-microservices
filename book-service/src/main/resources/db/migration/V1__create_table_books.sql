@@ -1,4 +1,4 @@
-CREATE TABLE books (
+CREATE TABLE bookJpaEntities (
     id BIGINT IDENTITY(1,1) PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
     author VARCHAR(255) NOT NULL,

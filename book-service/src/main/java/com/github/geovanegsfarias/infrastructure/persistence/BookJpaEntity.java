@@ -1,4 +1,4 @@
-package com.github.geovanegsfarias.model;
+package com.github.geovanegsfarias.infrastructure.persistence;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -12,7 +12,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
-public class Book {
+public class BookJpaEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -27,6 +27,6 @@ public class Book {
     @Column(nullable = false)
     private Integer availableCopies;
 
-    public Book() {
+    public BookJpaEntity() {
     }
 }

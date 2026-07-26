@@ -1,4 +1,4 @@
-package com.github.geovanegsfarias.exception;
+package com.github.geovanegsfarias.infrastructure.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
