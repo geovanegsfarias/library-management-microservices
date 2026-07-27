@@ -7,15 +7,13 @@
 ![Swagger](https://img.shields.io/badge/Swagger-3-27AE60)
 ![Docker](https://img.shields.io/badge/Docker-On-2980B9)
 
-<img src="notification-service/images/diagrama.png" alt="Diagrama">
-
 ---
 
 ### Descrição
 
-Sistema de gerenciamento de biblioteca dividido em três microsserviços independentes, cada um com seu próprio banco de dados, seguindo arquitetura de microsserviços com comunicação síncrona e assíncrona entre eles através do OpenFeign e do RabbitMQ.
+Sistema de gerenciamento de biblioteca dividido em três microsserviços independentes, cada um com seu próprio banco de dados, seguindo arquitetura de microsserviços e arquitetura limpa, com comunicação síncrona e assíncrona entre eles através do OpenFeign e do RabbitMQ.
 
-O bookJpaEntity-service cuida do cadastro, consulta e controle de disponibilidade dos livros. O loanEntity-service autentica os usuários via JWT, cria e devolve empréstimos consultando e reservando a disponibilidade do livro em tempo real, e roda um job diário que identifica empréstimos em atraso e publica um evento numa fila do RabbitMQ. O notification-service consome esses eventos e envia e-mails para o usuário do empréstimo.
+O book-service cuida do cadastro, consulta e controle de disponibilidade dos livros. O loan-service autentica os usuários via JWT, cria e devolve empréstimos consultando e reservando a disponibilidade do livro em tempo real, e roda um job diário que identifica empréstimos em atraso e publica um evento numa fila do RabbitMQ. O notification-service consome esses eventos e envia o e-mail para o usuário do empréstimo.
 
 ---
 
@@ -44,24 +42,24 @@ O bookJpaEntity-service cuida do cadastro, consulta e controle de disponibilidad
 
 ### Endpoints
 
-#### bookJpaEntity-service
+#### book-service
 
-- `GET /v1/bookJpaEntities` — lista livros.
-- `GET /v1/bookJpaEntities/{id}` — busca um livro específico.
-- `POST /v1/bookJpaEntities` — cadastra um livro.
-- `PUT /v1/bookJpaEntities/{id}` — atualiza um livro.
-- `DELETE /v1/bookJpaEntities/{id}` — remove um livro.
-- `PUT /v1/bookJpaEntities/{id}/reserve` — reserva uma cópia.
-- `PUT /v1/bookJpaEntities/{id}/return` — libera uma cópia.
+- `GET /v1/books` — lista livros.
+- `GET /v1/books/{id}` — busca um livro específico.
+- `POST /v1/books` — cadastra um livro.
+- `PUT /v1/books/{id}` — atualiza um livro.
+- `DELETE /v1/books/{id}` — remove um livro.
+- `PUT /v1/books/{id}/reserve` — reserva uma cópia.
+- `PUT /v1/books/{id}/return` — libera uma cópia.
 
-#### loanEntity-service
+#### loan-service
 
 - `POST /v1/auth/register` — registra um usuário.
 - `POST /v1/auth/login` — autentica e retorna um token JWT.
-- `GET /v1/loanEntities` — lista empréstimos.
-- `GET /v1/loanEntities/{id}` — busca um empréstimo específico.
-- `POST /v1/loanEntities` — cria um empréstimo para o usuário autenticado.
-- `PUT /v1/loanEntities/{id}/return` — registra a devolução de um empréstimo.
+- `GET /v1/loans` — lista empréstimos.
+- `GET /v1/loans/{id}` — busca um empréstimo específico.
+- `POST /v1/loans` — cria um empréstimo para o usuário autenticado.
+- `PUT /v1/loans/{id}/return` — registra a devolução de um empréstimo.
 
 ---
 
@@ -81,8 +79,8 @@ cd library-management-microservices
 #### Gere as chaves RSA
 
 ```bash
-openssl genrsa -out loanEntity-service/src/main/resources/app.key 2048
-openssl rsa -in loanEntity-service/src/main/resources/app.key -pubout -out loanEntity-service/src/main/resources/app.pub
+openssl genrsa -out loan-service/src/main/resources/app.key 2048
+openssl rsa -in loan-service/src/main/resources/app.key -pubout -out loan-service/src/main/resources/app.pub
 ```
 
 #### Configure as variáveis de ambiente
@@ -98,5 +96,6 @@ docker compose up --build
 - Book-Service: `http://localhost:8081/swagger-ui.html`
 - Loan-Service: `http://localhost:8082/swagger-ui.html`
 - Notification-Service: `http://localhost:8083`
+- RabbitMQ Management: `http://localhost:15672`
 
 ---

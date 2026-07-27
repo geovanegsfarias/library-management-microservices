@@ -13,6 +13,23 @@ public class Book {
     public Book() {
     }
 
+    public Book(String title, String author, String publisher, Integer totalCopies, Integer availableCopies) {
+        this.title = title;
+        this.author = author;
+        this.publisher = publisher;
+        this.totalCopies = totalCopies;
+        this.availableCopies = availableCopies;
+    }
+
+    public Book(Long id, String title, String author, String publisher, Integer totalCopies, Integer availableCopies) {
+        this.id = id;
+        this.title = title;
+        this.author = author;
+        this.publisher = publisher;
+        this.totalCopies = totalCopies;
+        this.availableCopies = availableCopies;
+    }
+
     public Long getId() {
         return id;
     }

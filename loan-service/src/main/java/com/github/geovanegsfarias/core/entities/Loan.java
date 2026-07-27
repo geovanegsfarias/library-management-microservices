@@ -19,6 +19,17 @@ public class Loan {
     public Loan() {
     }
 
+    public Loan(Long id, Long bookId, String bookTitle, User user, Instant loanDate, Instant dueDate, Instant returnedDate, LoanStatus status) {
+        this.id = id;
+        this.bookId = bookId;
+        this.bookTitle = bookTitle;
+        this.user = user;
+        this.loanDate = loanDate;
+        this.dueDate = dueDate;
+        this.returnedDate = returnedDate;
+        this.status = status;
+    }
+
     public Long getId() {
         return id;
     }
