@@ -20,5 +20,7 @@ public interface LoanMapper {
 
     List<LoanResponse> toLoanResponseList(List<Loan> loans);
 
+    @Mapping(target = "loanId", source = "id")
+    @Mapping(target = "userEmail", source = "user.email")
     LoanOverdueEvent toLoanOverdueEvent(Loan loan);
 }

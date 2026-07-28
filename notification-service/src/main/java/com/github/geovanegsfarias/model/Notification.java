@@ -20,7 +20,7 @@ public class Notification {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false)
-    private String to;
+    private String recipient;
     @Column(nullable = false)
     private String subject;
     @Column(nullable = false)

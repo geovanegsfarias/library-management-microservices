@@ -1,1 +1,1 @@
-ALTER TABLE loanEntities ADD book_title VARCHAR(255);
+ALTER TABLE loans ADD book_title VARCHAR(255);

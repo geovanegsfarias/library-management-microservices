@@ -13,7 +13,7 @@ public class OverdueLoanScheduler {
         this.processOverdueLoansUseCase = processOverdueLoansUseCase;
     }
 
-    @Scheduled(cron = "0 0 8 * * *")
+    @Scheduled(cron = "*/30 * * * * *")
     public void run() {
         processOverdueLoansUseCase.markOverdue();
     }

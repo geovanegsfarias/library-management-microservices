@@ -58,6 +58,8 @@ public class LoanController {
 
     @GetMapping("/{id}")
     @Operation(summary = "Get loan")
+    @ApiResponse(responseCode = "200", description = "Loan returned")
+    @ApiResponse(responseCode = "404", description = "Loan not found", content = @Content(mediaType = MediaType.APPLICATION_PROBLEM_JSON_VALUE, schema = @Schema(implementation = ProblemDetail.class)))
     @ApiResponse(responseCode = "500", description = "Internal server error", content = @Content(mediaType = MediaType.APPLICATION_PROBLEM_JSON_VALUE, schema = @Schema(implementation = ProblemDetail.class)))
     public ResponseEntity<LoanResponse> getLoanById(@PathVariable Long id) {
         log.debug("Request received to find loan by id {}", id);
