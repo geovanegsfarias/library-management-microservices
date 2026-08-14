@@ -35,4 +35,24 @@ public class GatewayConfig {
                         HandlerFunctions.http()).before(BeforeFilterFunctions.uri(gatewayProperties.loanServiceUri()))
                 .build();
     }
+
+    @Bean
+    public RouterFunction<ServerResponse> bookServiceDocsRoute() {
+        return GatewayRouterFunctions.route("book_service_docs")
+                .route(RequestPredicates.path("/v3/api-docs/book-service"),
+                        HandlerFunctions.http())
+                .before(BeforeFilterFunctions.rewritePath("/v3/api-docs/book-service", "/v3/api-docs"))
+                .before(BeforeFilterFunctions.uri(gatewayProperties.bookServiceUri()))
+                .build();
+    }
+
+    @Bean
+    public RouterFunction<ServerResponse> loanServiceDocsRoute() {
+        return GatewayRouterFunctions.route("loan_service_docs")
+                .route(RequestPredicates.path("/v3/api-docs/loan-service"),
+                        HandlerFunctions.http())
+                .before(BeforeFilterFunctions.rewritePath("/v3/api-docs/loan-service", "/v3/api-docs"))
+                .before(BeforeFilterFunctions.uri(gatewayProperties.loanServiceUri()))
+                .build();
+    }
 }
