@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: api-gateway
+  mvc:
+    problemdetails:
+      enabled: true
+
+server:
+  port: 8080
+
+gateway:
+  services:
+    book-service-uri: ${BOOK_SERVICE_URI:http://localhost:8081}
+    loan-service-uri: ${LOAN_SERVICE_URI:http://localhost:8082}
