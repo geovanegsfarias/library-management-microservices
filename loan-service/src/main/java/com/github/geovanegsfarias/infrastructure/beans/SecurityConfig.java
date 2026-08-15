@@ -24,12 +24,12 @@ import org.springframework.web.servlet.HandlerExceptionResolver;
 
 @Configuration
 @EnableWebSecurity
-@EnableConfigurationProperties(JwtConfigurationProperties.class)
+@EnableConfigurationProperties(JwtProperties.class)
 public class SecurityConfig {
     private final HandlerExceptionResolver resolver;
-    private final JwtConfigurationProperties jwtProperties;
+    private final JwtProperties jwtProperties;
 
-    public SecurityConfig(@Qualifier("handlerExceptionResolver") HandlerExceptionResolver resolver, JwtConfigurationProperties jwtProperties) {
+    public SecurityConfig(@Qualifier("handlerExceptionResolver") HandlerExceptionResolver resolver, JwtProperties jwtProperties) {
         this.resolver = resolver;
         this.jwtProperties = jwtProperties;
     }

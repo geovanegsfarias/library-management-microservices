@@ -28,8 +28,8 @@ public class BeanConfiguration {
     }
 
     @Bean
-    public BookClientGateway bookClientGateway(BookClient bookClient, ApiKeyConfigurationProperties apiKeyConfigurationProperties) {
-        return new BookClientGatewayImpl(bookClient, apiKeyConfigurationProperties);
+    public BookClientGateway bookClientGateway(BookClient bookClient, ApiKeyProperties apiKeyProperties) {
+        return new BookClientGatewayImpl(bookClient, apiKeyProperties);
     }
 
     @Bean
