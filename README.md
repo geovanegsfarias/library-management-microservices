@@ -7,6 +7,8 @@
 ![Swagger](https://img.shields.io/badge/Swagger-3-27AE60)
 ![Docker](https://img.shields.io/badge/Docker-On-2980B9)
 
+<img src="notification-service/images/diagrama.png" alt="Diagrama">
+
 ---
 
 ### Descrição
