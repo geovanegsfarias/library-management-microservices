@@ -106,11 +106,15 @@ public class Loan {
     }
 
     public void returnLoan() {
-        if (this.status == LoanStatus.RETURNED) {
-            throw new LoanAlreadyReturnedException("Loan already returned");
-        }
+        validateCanReturn();
 
         this.status = LoanStatus.RETURNED;
         this.returnedDate = Instant.now();
+    }
+
+    public void validateCanReturn() {
+        if (this.status == LoanStatus.RETURNED) {
+            throw new LoanAlreadyReturnedException("Loan already returned");
+        }
     }
 }

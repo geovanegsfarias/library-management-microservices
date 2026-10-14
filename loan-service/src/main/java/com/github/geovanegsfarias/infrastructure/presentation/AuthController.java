@@ -27,7 +27,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/v1/auth")
 @Slf4j
-@SecurityRequirement(name = "Bearer Authentication")
 @Tag(name = "Authentication")
 public class AuthController {
     private final AuthService authService;

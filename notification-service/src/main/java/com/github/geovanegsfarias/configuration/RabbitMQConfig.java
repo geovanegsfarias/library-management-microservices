@@ -3,10 +3,12 @@ package com.github.geovanegsfarias.configuration;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
+@ConditionalOnProperty(name = "broker.type", havingValue = "rabbitmq", matchIfMissing = true)
 public class RabbitMQConfig {
     private RabbitMQConfigurationProperties configurationProperties;
 

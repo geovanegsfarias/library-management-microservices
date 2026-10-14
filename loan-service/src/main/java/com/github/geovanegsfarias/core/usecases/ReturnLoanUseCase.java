@@ -19,6 +19,7 @@ public class ReturnLoanUseCase {
     public Loan returnLoan(Long id) {
         var loanToReturn = findLoanByIdUseCase.findById(id);
 
+        loanToReturn.validateCanReturn();
         bookClientGateway.returnBook(loanToReturn.getBookId());
 
         loanToReturn.returnLoan();

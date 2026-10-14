@@ -67,6 +67,7 @@ services:
     ports:
       - "8082:8082"
     environment:
+      SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE:-localstack}
       SPRING_DATASOURCE_URL: jdbc:sqlserver://sqlserver:1433;databaseName=loan-service;encrypt=true;trustServerCertificate=true
       SPRING_DATASOURCE_USERNAME: sa
       SPRING_DATASOURCE_PASSWORD: ${SQLSERVER_PASSWORD}
@@ -77,6 +78,15 @@ services:
       JWT_PRIVATE_KEY_PATH: file:/run/secrets/app.key
       JWT_PUBLIC_KEY_PATH: file:/run/secrets/app.pub
       INTERNAL_API_KEY: ${INTERNAL_API_KEY}
+      BROKER_TYPE: ${BROKER_TYPE}
+      AWS_REGION: ${AWS_REGION}
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+      AWS_SNS_ENDPOINT: ${AWS_SNS_ENDPOINT:-http://host.docker.internal:4566}
+      AWS_SQS_ENDPOINT: ${AWS_SQS_ENDPOINT:-http://host.docker.internal:4566}
+      SNS_ARN: ${SNS_ARN}
+      OVERDUE_LOAN_CRON: "${OVERDUE_LOAN_CRON:-0 0 3 * * *}"
+      OVERDUE_LOAN_ZONE: ${OVERDUE_LOAN_ZONE:-America/Sao_Paulo}
     volumes:
       - ./loan-service/src/main/resources/app.key:/run/secrets/app.key:ro
       - ./loan-service/src/main/resources/app.pub:/run/secrets/app.pub:ro
@@ -93,6 +103,7 @@ services:
     ports:
       - "8083:8083"
     environment:
+      SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE:-localstack}
       SPRING_DATASOURCE_URL: jdbc:sqlserver://sqlserver:1433;databaseName=notification-service;encrypt=true;trustServerCertificate=true
       SPRING_DATASOURCE_USERNAME: sa
       SPRING_DATASOURCE_PASSWORD: ${SQLSERVER_PASSWORD}
@@ -103,6 +114,13 @@ services:
       SPRING_MAIL_PORT: ${SPRING_MAIL_PORT}
       SPRING_MAIL_USERNAME: ${SPRING_MAIL_USERNAME}
       SPRING_MAIL_PASSWORD: ${SPRING_MAIL_PASSWORD}
+      BROKER_TYPE: ${BROKER_TYPE}
+      AWS_REGION: ${AWS_REGION}
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+      AWS_SNS_ENDPOINT: ${AWS_SNS_ENDPOINT:-http://host.docker.internal:4566}
+      AWS_SQS_ENDPOINT: ${AWS_SQS_ENDPOINT:-http://host.docker.internal:4566}
+      SQS_QUEUE_URL: ${SQS_QUEUE_URL}
 
 volumes:
   sqlserver-data:

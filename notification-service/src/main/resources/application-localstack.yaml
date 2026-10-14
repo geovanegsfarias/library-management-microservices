@@ -1,0 +1,9 @@
+spring:
+  cloud:
+    aws:
+      region:
+        static: ${AWS_REGION:us-east-1}
+      sns:
+        endpoint: ${AWS_SNS_ENDPOINT:http://host.docker.internal:4566}
+      sqs:
+        endpoint: ${AWS_SQS_ENDPOINT:http://host.docker.internal:4566}
