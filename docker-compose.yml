@@ -75,10 +75,12 @@ services:
       JWT_PUBLIC_KEY_PATH: file:/run/secrets/app.pub
       INTERNAL_API_KEY: ${INTERNAL_API_KEY}
       BROKER_TYPE: ${BROKER_TYPE:-rabbitmq}
-      AWS_REGION: ${AWS_REGION}
+      AWS_REGION: ${AWS_REGION:-us-east-1}
       AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
       AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
       SNS_ARN: ${SNS_ARN}
+      OVERDUE_LOAN_CRON: "${OVERDUE_LOAN_CRON:-0 0 3 * * *}"
+      OVERDUE_LOAN_ZONE: ${OVERDUE_LOAN_ZONE:-America/Sao_Paulo}
     volumes:
       - ./loan-service/src/main/resources/app.key:/run/secrets/app.key:ro
       - ./loan-service/src/main/resources/app.pub:/run/secrets/app.pub:ro
@@ -103,7 +105,7 @@ services:
       SPRING_MAIL_USERNAME: ${SPRING_MAIL_USERNAME}
       SPRING_MAIL_PASSWORD: ${SPRING_MAIL_PASSWORD}
       BROKER_TYPE: ${BROKER_TYPE:-rabbitmq}
-      AWS_REGION: ${AWS_REGION}
+      AWS_REGION: ${AWS_REGION:-us-east-1}
       AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
       AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
       SQS_QUEUE_URL: ${SQS_QUEUE_URL}
