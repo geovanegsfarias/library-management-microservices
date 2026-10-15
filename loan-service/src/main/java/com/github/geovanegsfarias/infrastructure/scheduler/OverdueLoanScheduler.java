@@ -14,8 +14,8 @@ public class OverdueLoanScheduler {
     }
 
     @Scheduled(
-            cron = "${OVERDUE_LOAN_CRON:0 0 3 * * *}",
-            zone = "${OVERDUE_LOAN_ZONE:America/Sao_Paulo}"
+            cron = "${app.scheduling.overdue-loan.cron}",
+            zone = "${app.scheduling.overdue-loan.zone}"
     )
     public void run() {
         processOverdueLoansUseCase.markOverdue();

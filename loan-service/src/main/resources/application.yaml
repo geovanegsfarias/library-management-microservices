@@ -15,7 +15,7 @@ spring:
   flyway:
     enabled: true
   rabbitmq:
-    addresses: ${SPRING_RABBITMQ_ADDRESSES}
+    addresses: ${SPRING_RABBITMQ_ADDRESSES:amqp://guest:guest@localhost:5672}
   cloud:
     aws:
       region:
@@ -38,6 +38,10 @@ broker:
     queue-url: ${SQS_QUEUE_URL:}
 
 app:
+  scheduling:
+    overdue-loan:
+      cron: ${OVERDUE_LOAN_CRON:0 0 3 * * *}
+      zone: ${OVERDUE_LOAN_ZONE:America/Sao_Paulo}
   jwt:
     public-key: ${JWT_PUBLIC_KEY_PATH:file:./src/main/resources/app.pub}
     private-key: ${JWT_PRIVATE_KEY_PATH:file:./src/main/resources/app.key}

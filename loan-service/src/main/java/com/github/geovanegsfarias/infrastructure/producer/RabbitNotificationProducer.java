@@ -19,6 +19,7 @@ public class RabbitNotificationProducer implements NotificationProducer {
         this.configurationProperties = configurationProperties;
     }
 
+    @Override
     public void sendNotification(LoanOverdueEvent overdueEvent) {
         log.debug("Loan overdue notification sent to {}", overdueEvent.userEmail());
 
